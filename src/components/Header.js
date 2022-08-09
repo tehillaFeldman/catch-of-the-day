@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 const Header = ({ tagline }) => (
-  <Fragment className='top'>
+  <div className='top'>
     <h1>
       Catch
       <span className='ofThe'>
@@ -13,7 +13,7 @@ const Header = ({ tagline }) => (
     <h3 className='tagline'>
       <span>{tagline}</span>
     </h3>
-  </Fragment>
+  </div>
 );
 
 export default Header;
