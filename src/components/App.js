@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import Header from './Header';
 import Order from './Order';
 import Inventory from './Inventory';
+import sampleFishes from '../sample-fishes';
 
 class App extends Component {
   state = {
     fishes: {},
     order: {},
   };
+  componentDidMount() {
+    console.log('mounted');
+  }
   addFish = (fish) => {
     // take a copy of existing state
     const fishes = { ...this.state.fishes };
