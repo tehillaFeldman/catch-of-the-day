@@ -4,14 +4,40 @@ import Order from './Order';
 import Inventory from './Inventory';
 import sampleFishes from '../sample-fishes';
 import Fish from './Fish';
+import base from '../base';
 class App extends Component {
   state = {
     fishes: {},
     order: {},
   };
   componentDidMount() {
-    console.log('mounted');
+    const { params } = this.props.match;
+    // first reninstate our localStorage
+    const localStorageRef = localStorage.getItem(params.storeId);
+    if (localStorageRef) {
+      this.setState({ order: JSON.parse(localStorageRef) });
+    }
+    console.log(localStorageRef);
+    this.ref = base.syncState(`${params.storeId}/fishes`, {
+      context: this,
+      state: 'fishes',
+    });
   }
+  // invoked immedietly after update occurs to load data to local storage
+  componentDidUpdate() {
+    console.log(this.state.order);
+    localStorage.setItem(
+      this.props.match.params.storeId,
+      JSON.stringify(this.state.order)
+    );
+    console.log('updated');
+  }
+
+  // to prevent memory leak undo what has been mounted
+  componentWillUnmount() {
+    base.removeBinding(this.ref);
+  }
+
   addFish = (fish) => {
     // take a copy of existing state
     const fishes = { ...this.state.fishes };
