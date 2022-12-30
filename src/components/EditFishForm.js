@@ -8,7 +8,7 @@ class EditFishForm extends Component {
       name: PropTypes.string,
       desc: PropTypes.string,
       status: PropTypes.string,
-      price: PropTypes.number,
+      price: PropTypes.string,
     }),
     index: PropTypes.string,
     updateFish: PropTypes.func,
